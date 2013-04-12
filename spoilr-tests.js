@@ -11,15 +11,30 @@ YUI.add('spoilr-tests', function(Y) {
         'Spoilr should toggle a class of "warning" on the button when hovered': function() {
             Y.Assert.isFalse(this.button.hasClass("warning"), "Button should not have a class of warning before hover");
 
-            // Simulate a hover event
+            // Simulate a mouseover event
             this.button.simulate("mouseover");
 
             Y.Assert.isTrue(this.button.hasClass("warning"), "Button should have a class of warning after hover");
 
-            // Simulate an "unhover" event
+            // Simulate an mouseout event
+            this.button.simulate("mouseout");
+
+            Y.Assert.isFalse(this.button.hasClass("warning"), "Button should not have a class of warning after hover is over");
+        },
+        
+        'Spoilr should toggle a class of "warning" on the button when keyboard focused': function() {
+            Y.Assert.isFalse(this.button.hasClass("warning"), "Button should not have a class of warning before hover");
+
+            // Simulate a keyboard focus event
+            this.button.simulate("focus");
+
+            Y.Assert.isTrue(this.button.hasClass("warning"), "Button should have a class of warning after hover");
+
+            // Simulate an keyboard blur event
             this.button.simulate("blur");
 
             Y.Assert.isFalse(this.button.hasClass("warning"), "Button should not have a class of warning after hover is over");
+  
         },
 
         'Spoilr should remove the "hidden" class on the spoiler when clicked': function() {

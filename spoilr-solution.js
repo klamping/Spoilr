@@ -60,7 +60,7 @@ YUI.add('spoilr', function(Y) {
         }, 5000);
     });
 
-    button.on("hover", function () {
+    button.on(["focus", "mouseover"], function () {
         button.addClass('warning');
     });
 
