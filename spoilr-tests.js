@@ -34,6 +34,11 @@ YUI.add('spoilr-tests', function(Y) {
         'Spoilr should add the "hidden" class back to the spoiler after 5 seconds': function() {
             // Simulate a click event
             this.button.simulate("click");
+            
+            Y.Assert.isFalse(this.spoilr.hasClass("hidden"), "Spoiler should not have class of 'hidden' after a click");
+            
+            // Simulate a click event
+            this.button.simulate("click");
 
             this.wait(function (){
                 // Assert 
