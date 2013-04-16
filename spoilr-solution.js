@@ -52,6 +52,14 @@ YUI.add('spoilr', function(Y) {
     // insert your JavaScript here
     var button = Y.one("#show-spoiler");
     var spoiler = Y.one("#spoiler");
+    
+    function warn () {
+        button.addClass("warning");
+    }
+    
+    function unwarn () {
+        button.removeClass("warning");
+    }
 
     button.on("click", function () {
         spoiler.removeClass("hidden");
@@ -60,11 +68,7 @@ YUI.add('spoilr', function(Y) {
         }, 5000);
     });
 
-    button.on(["focus", "mouseover"], function () {
-        button.addClass('warning');
-    });
-
-    button.on(["blur", "mouseout"], function () {
-        button.removeClass('warning');
-    });
+    button.on("hover", warn, unwarn);
+    button.on("focus", warn);
+    button.on("blur", unwarn);
 });
