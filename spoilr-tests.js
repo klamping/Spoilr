@@ -23,17 +23,20 @@ YUI.add('spoilr-tests', function(Y) {
         },
 
         'Spoilr should remove the "hidden" class on the spoiler when clicked': function() {
-            Y.Assert.isTrue(this.spoilr.hasClass("hidden"), "Spoiler should have a class of warning before click");
+            Y.Assert.isTrue(this.spoilr.hasClass("hidden"), "Spoiler should have a class of hidden before click");
 
             // Simulate a click event
             this.button.simulate("click");
 
-            Y.Assert.isFalse(this.spoilr.hasClass("hidden"), "Spoiler should have a class of warning after click");  
+            Y.Assert.isFalse(this.spoilr.hasClass("hidden"), "Spoiler should not have a class of hidden after click");
         },
 
         'Spoilr should add the "hidden" class back to the spoiler after 5 seconds': function() {
             // Simulate a click event
             this.button.simulate("click");
+
+            // Sanity check that class was removed
+            Y.Assert.isFalse(this.spoilr.hasClass("hidden"), "Spoiler should not have a class of hidden after click");
 
             this.wait(function (){
                 // Assert 
