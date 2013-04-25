@@ -1,3 +1,10 @@
+var YUI = YUI || undefined;
+
+if (typeof require == "undefined" && typeof YUI == "undefined") {
+    // we need to pull in YUI using NodeJS's require pattern if it's not already loaded
+    YUI = require('yui').YUI;
+}
+
 YUI.add('spoilr', function(Y) {
 
     // WAIT!!! Do you really want to spoil the spoilr code?
@@ -52,6 +59,14 @@ YUI.add('spoilr', function(Y) {
     // insert your JavaScript here
     var button = Y.one("#show-spoiler");
     var spoiler = Y.one("#spoiler");
+    
+    function warn () {
+        button.addClass("warning");
+    }
+    
+    function unwarn () {
+        button.removeClass("warning");
+    }
 
     button.on("click", function () {
         spoiler.removeClass("hidden");
@@ -60,11 +75,7 @@ YUI.add('spoilr', function(Y) {
         }, 5000);
     });
 
-    button.on("hover", function () {
-        button.addClass('warning');
-    });
-
-    button.on(["blur", "mouseout"], function () {
-        button.removeClass('warning');
-    });
+    button.on("hover", warn, unwarn);
+    button.on("focus", warn);
+    button.on("blur", unwarn);
 });
